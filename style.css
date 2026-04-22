@@ -1,0 +1,8 @@
+body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+#search { padding: 10px; width: 80%; max-width: 500px; border-radius: 5px; border: none; }
+#question-list { padding: 20px; max-width: 800px; margin: auto; }
+.card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.card:hover { transform: translateY(-3px); }
+.card h3 { margin: 0; color: #2c3e50; }
+.badge { background: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
