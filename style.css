@@ -1,19 +1,35 @@
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+
+  --haram: #ef4444;
+  --caiz: #22c55e;
+  --mekruh: #f59e0b;
+  --tartismali: #eab308;
+  --supheli: #6b7280;
+
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   margin: 0;
-  background: #f6f7fb;
-  color: #111;
+  font-family: ui-sans-serif, system-ui;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* HEADER */
-h1 {
+.header {
+  padding: 30px 20px;
   text-align: center;
-  padding: 20px;
   font-size: 28px;
+  font-weight: 700;
 }
 
 /* CONTAINER */
-#posts, #content {
+.container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
@@ -21,12 +37,11 @@ h1 {
 
 /* CARD */
 .card {
-  background: white;
+  background: var(--card);
   padding: 18px;
-  margin-bottom: 12px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  cursor: pointer;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
   transition: 0.2s;
 }
 
@@ -34,68 +49,70 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* TITLE */
+/* QUESTION TITLE */
 .card h3 {
-  margin: 0 0 10px 0;
+  margin: 0;
   font-size: 18px;
+  line-height: 1.4;
 }
 
 /* BADGE */
 .badge {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
+  margin-top: 10px;
   color: white;
 }
 
-/* HÜKÜM RENKLERİ */
-.haram { background: #e74c3c; }
-.caiz { background: #2ecc71; }
-.mekruh { background: #f39c12; }
-.tartismali { background: #f1c40f; color: black; }
-.supheli { background: #7f8c8d; }
+/* COLORS */
+.haram { background: var(--haram); }
+.caiz { background: var(--caiz); }
+.mekruh { background: var(--mekruh); }
+.tartismali { background: var(--tartismali); color: black; }
+.supheli { background: var(--supheli); }
 
-/* HADİS BOX */
-.hadis {
+/* POST PAGE */
+.post {
   background: white;
-  padding: 15px;
-  border-radius: 12px;
-  margin: 10px 0;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-  border-left: 5px solid;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  line-height: 1.7;
 }
 
-.sahih { border-color: #2ecc71; }
-.hasen { border-color: #3498db; }
-.zayif { border-color: #f39c12; }
-.mevzu { border-color: #e74c3c; }
-
-/* TABLE */
+/* MEZHEP TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  margin-top: 15px;
   border-radius: 12px;
   overflow: hidden;
-  margin-top: 10px;
-}
-
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
 }
 
 th {
-  background: #fafafa;
+  background: #f1f5f9;
+  text-align: left;
+  padding: 12px;
 }
 
-/* BACK LINK */
-a {
-  display: inline-block;
-  margin: 15px 20px;
-  text-decoration: none;
-  color: #333;
+td {
+  padding: 12px;
+  border-top: 1px solid #eee;
 }
+
+/* HADIS */
+.hadis {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 12px;
+  border-left: 5px solid;
+}
+
+.sahih { border-color: #22c55e; }
+.hasen { border-color: #3b82f6; }
+.zayif { border-color: #f59e0b; }
+.mevzu { border-color: #ef4444; }
