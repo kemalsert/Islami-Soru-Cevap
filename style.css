@@ -1,0 +1,48 @@
+body {
+  font-family: Arial;
+  margin: 20px;
+  background: #f5f5f5;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.haram { background: red; }
+.caiz { background: green; }
+.mekruh { background: orange; }
+.tartismali { background: gold; color: black; }
+.supheli { background: gray; }
+
+.hadis {
+  padding: 10px;
+  margin: 10px 0;
+  border-left: 5px solid;
+}
+
+.sahih { border-color: green; }
+.hasen { border-color: blue; }
+.zayif { border-color: orange; }
+.mevzu { border-color: red; }
+
+table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
