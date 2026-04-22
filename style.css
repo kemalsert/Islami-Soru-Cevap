@@ -1,118 +1,74 @@
-:root {
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-
-  --haram: #ef4444;
-  --caiz: #22c55e;
-  --mekruh: #f59e0b;
-  --tartismali: #eab308;
-  --supheli: #6b7280;
-
-  --shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui;
-  background: var(--bg);
-  color: var(--text);
+  font-family: system-ui, sans-serif;
+  background: #ffffff;
+  color: #111;
 }
 
-/* HEADER */
-.header {
-  padding: 30px 20px;
+.topbar {
+  padding: 60px 20px 30px;
   text-align: center;
-  font-size: 28px;
-  font-weight: 700;
 }
 
-/* CONTAINER */
+.brand {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  color: #666;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
 .container {
-  max-width: 900px;
+  max-width: 720px;
   margin: auto;
   padding: 20px;
 }
 
-/* CARD */
-.card {
-  background: var(--card);
-  padding: 18px;
-  margin-bottom: 14px;
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-/* QUESTION TITLE */
-.card h3 {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-/* BADGE */
-.badge {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 10px;
-  color: white;
-}
-
-/* COLORS */
-.haram { background: var(--haram); }
-.caiz { background: var(--caiz); }
-.mekruh { background: var(--mekruh); }
-.tartismali { background: var(--tartismali); color: black; }
-.supheli { background: var(--supheli); }
-
-/* POST PAGE */
-.post {
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  line-height: 1.7;
-}
-
-/* MEZHEP TABLE */
-table {
+/* SEARCH */
+.search {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  border-radius: 12px;
-  overflow: hidden;
+  padding: 14px 16px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 30px;
 }
 
-th {
-  background: #f1f5f9;
-  text-align: left;
-  padding: 12px;
+.search:focus {
+  border-color: #999;
 }
 
-td {
-  padding: 12px;
-  border-top: 1px solid #eee;
+/* LIST */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* HADIS */
-.hadis {
-  background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-  margin-top: 12px;
-  border-left: 5px solid;
+/* ITEM (NO CARD LOOK) */
+.item {
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: inherit;
 }
 
-.sahih { border-color: #22c55e; }
-.hasen { border-color: #3b82f6; }
-.zayif { border-color: #f59e0b; }
-.mevzu { border-color: #ef4444; }
+.item:hover .title {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.meta {
+  font-size: 13px;
+  color: #777;
+  margin-top: 4px;
+}
