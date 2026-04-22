@@ -1,43 +1,42 @@
-<div class="header">İslami Soru-Cevap Portalı</div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>İslami Soru-Cevap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="brand">İslami Soru-Cevap</div>
+  <div class="desc">Fıkıh • Hadis • Mezhepler Arası Karşılaştırma</div>
+</div>
 
 <div class="container">
 
-  <input placeholder="Soru ara..." style="
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    border:1px solid #ddd;
-    margin-bottom:20px;
-    font-size:14px;
-  " />
+  <input class="search" placeholder="Soru ara (örn: sigara, namaz, faiz...)">
 
-  <h2>Son Sorular</h2>
+  <div class="list">
 
-  <div class="card">
-    <h3>Sigara içmek haram mı?</h3>
-    <span class="badge mekruh">MEKRUH</span>
-  </div>
+    <a class="item" href="post.html">
+      <div class="title">Sigara içmek haram mı?</div>
+      <div class="meta">Mekruh • Mezhepler ihtilaflı</div>
+    </a>
 
-  <div class="card">
-    <h3>Namazı terk etmek günah mı?</h3>
-    <span class="badge haram">HARAM</span>
-  </div>
+    <a class="item">
+      <div class="title">Kredi kullanmak caiz mi?</div>
+      <div class="meta">Tartışmalı • Faiz şüphesi</div>
+    </a>
 
-  <div class="card">
-    <h3>Kredi kullanmak caiz mi?</h3>
-    <span class="badge tartismali">TARTIŞMALI</span>
+    <a class="item">
+      <div class="title">Namazı terk etmek günah mı?</div>
+      <div class="meta">Haram • Açık hüküm</div>
+    </a>
+
   </div>
 
 </div>
-<div style="
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:10px;
-  font-size:14px;
-">
-  <a href="#">Ana Sayfa</a>
-  <a href="#">Fıkıh</a>
-  <a href="#">İbadet</a>
-  <a href="#">Muamelat</a>
-</div>
+
+</body>
+</html>
