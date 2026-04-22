@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soru Detayı</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="question-title">Yükleniyor...</h1>
+        <a href="index.html" style="color: white;">← Geri Dön</a>
+    </header>
+    <main style="padding: 20px; max-width: 800px; margin: auto;">
+        <p id="description" style="font-size: 18px; line-height: 1.6;"></p>
+        <table id="details-table">
+            </table>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug');
+
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                const item = data.find(q => q.slug === slug);
+                if (item) {
+                    document.getElementById('question-title').innerText = item.soru;
+                    document.getElementById('description').innerText = item.aciklama;
+                    
+                    const table = document.getElementById('details-table');
+                    table.innerHTML = `
+                        <tr><th>Mezhep</th><th>Hüküm</th></tr>
+                        <tr><td>Hanefi</td><td>${item.hanefi}</td></tr>
+                        <tr><td>Şafii</td><td>${item.safii}</td></tr>
+                        <tr><td>Maliki</td><td>${item.maliki}</td></tr>
+                        <tr><td>Hanbeli</td><td>${item.hanbeli}</td></tr>
+                        <tr><td>Ayet</td><td>${item.ayet}</td></tr>
+                        <tr><td>Hadis</td><td>${item.hadis}</td></tr>
+                    `;
+                }
+            });
+    </script>
+</body>
+</html>
