@@ -1,27 +1,33 @@
-fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    const list = document.getElementById('question-list');
-    const searchInput = document.getElementById('search');
+async function loadPost() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+    const response = await fetch(`/api/get-post?slug=${slug}`);
+    const data = await response.json();
 
-    function displayQuestions(questions) {
-      list.innerHTML = '';
-      questions.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-          <h3>${item.soru}</h3>
-          <span class="badge">${item.kategori}</span>
-        `;
-        div.onclick = () => window.location.href = `post.html?slug=${item.slug}`;
-        list.appendChild(div);
-      });
+    document.getElementById('soru-baslik').innerText = data.soru;
+    
+    const hKart = document.getElementById('hukum-kart');
+    hKart.innerText = data.hukum;
+    hKart.className = `hukum-box bg-${data.hukum.toLowerCase()}`;
+
+    if(data.ayet_metin) {
+        document.getElementById('ayet-metin').innerText = data.ayet_metin;
+        document.getElementById('ayet-ref').innerText = data.ayet_referans;
     }
 
-    displayQuestions(data);
+    if(data.hadis_metin) {
+        document.getElementById('hadis-metin').innerText = data.hadis_metin;
+        document.getElementById('hadis-bilgi').innerText = data.hadis_bilgi;
+    }
 
-    searchInput.oninput = (e) => {
-      const filtered = data.filter(q => q.soru.toLowerCase().includes(e.target.value.toLowerCase()));
-      displayQuestions(filtered);
-    };
-  });
+    const mezhepler = JSON.parse(data.mezhepler_json);
+    const tbody = document.getElementById('mezhep-body');
+    
+    Object.keys(mezhepler).forEach(m => {
+        const row = `<tr>
+            <td class="${m.toLowerCase()}-bg"><strong>${m}</strong></td>
+            <td class="${m.toLowerCase()}-bg">${mezhepler[m]}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
+}
