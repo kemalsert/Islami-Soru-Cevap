@@ -2,31 +2,225 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Fetvaci</title>
-<link rel="stylesheet" href="/style.css">
+<title>İslami Bilgi Sistemi</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root{
+  --bg:#05070b;
+  --card:#0f1622;
+  --soft:#121c2b;
+  --stroke:rgba(255,255,255,0.06);
+  --text:#e6edf3;
+  --muted:#9aa4b2;
+
+  --helal:#00c853;
+  --haram:#ff4d4d;
+  --mekruh:#f5c542;
+  --mubah:#8b8b8b;
+}
+
+/* GLOBAL */
+body{
+  margin:0;
+  font-family:Inter;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(245,197,66,0.12), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(0,200,83,0.06), transparent 50%),
+    var(--bg);
+  color:var(--text);
+}
+
+/* HERO (CAMİ SİLÜET + MODERN GLASS) */
+.hero{
+  height:260px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.2), var(--bg)),
+    url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1600&q=60");
+  background-size:cover;
+  background-position:center;
+
+  border-bottom:1px solid var(--stroke);
+}
+
+.hero h1{
+  font-size:28px;
+  margin:0;
+  letter-spacing:2px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:6px;
+}
+
+/* SEARCH */
+.search{
+  max-width:750px;
+  margin:-30px auto 20px;
+  background:rgba(15,22,34,0.85);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--stroke);
+  padding:14px;
+  border-radius:16px;
+}
+
+.search input{
+  width:100%;
+  background:none;
+  border:none;
+  color:white;
+  outline:none;
+}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.title{
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--muted);
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
+}
+
+/* CARD (MODERN DEPTH) */
+.card{
+  background:linear-gradient(180deg,#121c2b,#0f1622);
+  border:1px solid var(--stroke);
+  padding:16px;
+  border-radius:16px;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(245,197,66,0.3);
+}
+
+/* BADGES */
+.badge{
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:999px;
+  display:inline-block;
+  margin-bottom:8px;
+}
+
+.helal{background:var(--helal); color:white;}
+.haram{background:var(--haram); color:white;}
+.mekruh{background:var(--mekruh); color:black;}
+.mubah{background:var(--mubah); color:white;}
+
+/* QUICK FILTER BAR */
+.filters{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:10px 0 0;
+}
+
+.filters div{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+</style>
 </head>
 
 <body>
 
-<header class="header">
-  <h1>📿 Fetvaci</h1>
-  <input type="text" id="search" placeholder="Soru ara...">
-</header>
+<div class="hero">
+  <h1>﴾ İLİM NURDUR ﴿</h1>
+  <p>İslami bilgi sistemi · Fetva · Mezhep · Kaynak</p>
+</div>
 
-<main>
+<div class="search">
+  <input id="search" placeholder="Soru, konu veya hüküm ara...">
+</div>
 
-<section>
-  <h2>📌 Önerilenler</h2>
-  <div id="onerilenler" class="grid"></div>
-</section>
+<div class="filters">
+  <div onclick="filter('')">Hepsi</div>
+  <div onclick="filter('helal')">Helal</div>
+  <div onclick="filter('haram')">Haram</div>
+  <div onclick="filter('mekruh')">Mekruh</div>
+</div>
 
-<section>
-  <h2>⚖️ Tartışmalı (Mekruh)</h2>
-  <div id="mekruh" class="grid"></div>
-</section>
+<div class="section">
+  <div class="title">Önerilen Sorular</div>
+  <div class="grid" id="list"></div>
+</div>
 
-</main>
+<script>
+async function load(){
+  const res = await fetch("/");
+  const data = await res.json();
 
-<script src="/script.js"></script>
+  const list = document.getElementById("list");
+
+  data.fetvalar.forEach(f=>{
+    list.innerHTML += `
+      <div class="card" data-hukum="${f.hukum}" onclick="go('${f.slug}')">
+        <div class="badge ${getClass(f.hukum)}">${f.hukum}</div>
+        ${f.soru}
+      </div>
+    `;
+  });
+}
+
+function go(s){
+  location.href="/post/"+s;
+}
+
+function filter(t){
+  document.querySelectorAll(".card").forEach(c=>{
+    const h = (c.dataset.hukum||"").toLowerCase();
+    c.style.display = !t || h.includes(t) ? "block" : "none";
+  });
+}
+
+function getClass(h){
+h = h.toLowerCase();
+if(h.includes("helal")) return "helal";
+if(h.includes("haram")) return "haram";
+if(h.includes("mekruh")) return "mekruh";
+return "mubah";
+}
+
+document.getElementById("search").addEventListener("input",e=>{
+let v=e.target.value.toLowerCase();
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+});
+});
+
+load();
+</script>
+
 </body>
 </html>
