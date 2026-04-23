@@ -1,114 +1,79 @@
-:root {
-    --primary: #1a4731; /* İslam yeşili tonu */
-    --accent: #c9a45c; /* Altın/Pirinç tonu */
-    --bg: #fdfcf8;
-    --text: #2c3e50;
-    --haram: #e74c3c;
-    --helal: #27ae60;
-    --mekruh: #f39c12;
-}
-
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    margin: 0;
-    line-height: 1.6;
+  margin:0;
+  font-family: Arial;
+  background: linear-gradient(120deg,#0f172a,#1e293b);
+  color:#fff;
 }
 
-.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-
-/* Hero & Search */
-.hero {
-    background: linear-gradient(rgba(26,71,49,0.9), rgba(26,71,49,0.9)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80');
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
+.header {
+  padding:20px;
+  text-align:center;
+  background: rgba(0,0,0,0.3);
 }
 
-.hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
-
-.search-box {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+input {
+  padding:10px;
+  width:60%;
+  border-radius:10px;
 }
 
-.search-box input {
-    width: 60%;
-    padding: 15px;
-    border-radius: 30px;
-    border: none;
-    font-size: 1rem;
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+  padding:20px;
 }
-
-.search-box button {
-    padding: 15px 40px;
-    border-radius: 30px;
-    background: var(--accent);
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Grids */
-.section-title { border-bottom: 2px solid var(--accent); display: inline-block; margin: 40px 0 20px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 
 .card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-left: 5px solid var(--accent);
-    cursor: pointer;
-    transition: 0.3s;
-}
-.card:hover { transform: translateY(-5px); }
-
-/* Post Detail */
-.post-question { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; }
-
-.hukum-card {
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    margin-bottom: 40px;
-    color: white;
-    font-weight: 800;
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
 }
 
-/* Hüküm Renkleri */
-.hukum-mekruh { background-color: var(--mekruh); }
-.hukum-helal { background-color: var(--helal); }
-.hukum-haram { background-color: var(--haram); }
-
-.clean-quote {
-    padding: 20px 40px;
-    margin: 20px 0;
-    font-style: italic;
-    font-size: 1.2rem;
-    border-left: none;
-    position: relative;
-    background: #f1f1f1;
+.card:hover {
+  transform:scale(1.05);
+  background:#334155;
 }
 
-cite { display: block; margin-top: 10px; font-weight: bold; font-style: normal; color: var(--accent); }
-
-.mezhep-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+.mekruh {
+  border:2px solid orange;
 }
 
-.mezhep-item {
-    padding: 20px;
-    border-radius: 8px;
-    background: #eee;
-    border: 1px solid #ddd;
+.post {
+  padding:20px;
 }
 
-.hidden { display: none; }
+.block {
+  background:#111827;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+.hukum.mekruh { border-left:5px solid orange; }
+.hukum.farz { border-left:5px solid green; }
+.hukum.haram { border-left:5px solid red; }
+
+blockquote {
+  background:#0b1220;
+  padding:10px;
+  border-left:4px solid #38bdf8;
+}
+
+.mezhepler {
+  display:grid;
+  gap:5px;
+}
+
+.mezhep {
+  padding:8px;
+  border-radius:8px;
+}
+
+.hanefi { background:#1d4ed8; }
+.safi { background:#047857; }
+.maliki { background:#b45309; }
+.hanbeli { background:#7c2d12; }
