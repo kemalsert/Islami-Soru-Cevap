@@ -1,184 +1,38 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fetva Kütüphanesi</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-body{
-margin:0;
-font-family:Inter;
-background: radial-gradient(circle at top, #0b1220, #05070f);
-color:#fff;
-}
-
-/* HERO */
-.hero{
-padding:60px 20px;
-text-align:center;
-background:
-linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-url('https://images.unsplash.com/photo-1548013146-72479768bada') center/cover;
-border-bottom:1px solid rgba(255,215,0,0.2);
-}
-
-.hero h1{
-font-size:42px;
-color:#ffd700;
-margin:0;
-animation:fade 1s ease;
-}
-
-.hero p{
-opacity:0.8;
-margin-top:10px;
-}
-
-/* SEARCH */
-.search{
-margin-top:20px;
-}
-
-.search input{
-padding:14px;
-width:320px;
-border-radius:12px;
-border:1px solid #333;
-background:#0f172a;
-color:white;
-outline:none;
-}
-
-/* GRID */
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:15px;
-padding:30px;
-}
-
-/* CARD */
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,215,0,0.15);
-padding:18px;
-border-radius:16px;
-cursor:pointer;
-transition:0.3s;
-position:relative;
-overflow:hidden;
-}
-
-.card:hover{
-transform:translateY(-6px);
-border-color:#ffd700;
-box-shadow:0 0 20px rgba(255,215,0,0.2);
-}
-
-.cat{
-font-size:12px;
-color:#ffd700;
-}
-
-.title{
-margin-top:10px;
-font-weight:600;
-}
-
-/* POST */
-.post{
-max-width:900px;
-margin:40px auto;
-background:rgba(255,255,255,0.05);
-padding:25px;
-border-radius:16px;
-border:1px solid rgba(255,215,0,0.2);
-}
-
-.back{
-cursor:pointer;
-color:#ffd700;
-margin-bottom:15px;
-display:inline-block;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fetva Kütüphanesi</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-<div class="hero">
-<h1>📖 Fetva Kütüphanesi</h1>
-<p>Kur’an ve Sünnet ışığında güvenilir İslami cevaplar</p>
+<header class="hero">
+  <div class="overlay"></div>
+  <h1>Fetva Kütüphanesi</h1>
+  <p>Soru sor, hükmü öğren</p>
 
-<div class="search">
-<input oninput="filter(this.value)" placeholder="Soru ara...">
-</div>
-</div>
+  <div class="search-box">
+    <input id="searchInput" placeholder="Soru ara..." />
+    <button onclick="search()">Ara</button>
+  </div>
+</header>
 
-<div id="app">Yükleniyor...</div>
+<section class="grid">
 
-<script>
+  <div class="card">
+    <h2>⭐ Önerilenler</h2>
+    <div id="recommended"></div>
+  </div>
 
-const API = "https://YOUR-WORKER.workers.dev";
+  <div class="card danger">
+    <h2>⚠ Tartışmalı Konular</h2>
+    <div id="controversial"></div>
+  </div>
 
-let data = [];
+</section>
 
-async function load(){
-data = await fetch(API + "/api/list").then(r=>r.json());
-render(data);
-}
-
-function render(list){
-document.getElementById("app").innerHTML = `
-<div class="container">
-${list.map(x=>`
-<div class="card" onclick="openPost('${x.slug}')">
-<div class="cat">${x.kategori}</div>
-<div class="title">${x.soru}</div>
-</div>
-`).join("")}
-</div>
-`;
-}
-
-function filter(q){
-q=q.toLowerCase();
-render(data.filter(x=>
-x.soru.toLowerCase().includes(q) ||
-x.kategori.toLowerCase().includes(q)
-));
-}
-
-async function openPost(slug){
-const p = await fetch(API+"/api/post/"+slug).then(r=>r.json());
-
-document.getElementById("app").innerHTML = `
-<div class="post">
-<span class="back" onclick="load()">← Geri</span>
-
-<h2 style="color:#ffd700">${p.soru}</h2>
-<p>${p.kategori}</p>
-
-<h3>Hüküm</h3><p>${p.hukum||""}</p>
-<h3>Ayet</h3><p>${p.ayet_metin||""}</p>
-<h3>Hadis</h3><p>${p.hadis_metin||""}</p>
-<h3>Açıklama</h3><p>${p.aciklama||""}</p>
-</div>
-`;
-}
-
-load();
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
