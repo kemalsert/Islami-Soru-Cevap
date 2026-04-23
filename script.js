@@ -1,33 +1,65 @@
+const API = "/api";
+
+async function search() {
+  const q = document.getElementById("searchInput").value;
+  if (!q) return;
+
+  window.location.href = `/post.html?slug=${encodeURIComponent(q)}`;
+}
+
+async function loadHome() {
+  const res1 = await fetch(API + "/recommended");
+  const rec = await res1.json();
+
+  const res2 = await fetch(API + "/controversial");
+  const con = await res2.json();
+
+  document.getElementById("recommended").innerHTML =
+    rec.map(i => `<a href="/post.html?slug=${i.slug}">📌 ${i.soru}</a>`).join("<br>");
+
+  document.getElementById("controversial").innerHTML =
+    con.map(i => `<a href="/post.html?slug=${i.slug}">⚠ ${i.soru}</a>`).join("<br>");
+}
+
 async function loadPost() {
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
-    const response = await fetch(`/api/get-post?slug=${slug}`);
-    const data = await response.json();
+  const slug = new URLSearchParams(location.search).get("slug");
 
-    document.getElementById('soru-baslik').innerText = data.soru;
-    
-    const hKart = document.getElementById('hukum-kart');
-    hKart.innerText = data.hukum;
-    hKart.className = `hukum-box bg-${data.hukum.toLowerCase()}`;
+  const res = await fetch(API + "/post/" + slug);
+  const data = await res.json();
 
-    if(data.ayet_metin) {
-        document.getElementById('ayet-metin').innerText = data.ayet_metin;
-        document.getElementById('ayet-ref').innerText = data.ayet_referans;
-    }
+  const mezhep = JSON.parse(data.mezhepler_json || "{}");
 
-    if(data.hadis_metin) {
-        document.getElementById('hadis-metin').innerText = data.hadis_metin;
-        document.getElementById('hadis-bilgi').innerText = data.hadis_bilgi;
-    }
+  document.getElementById("post").innerHTML = `
+    <div class="card post">
+      <h1>${data.soru}</h1>
 
-    const mezhepler = JSON.parse(data.mezhepler_json);
-    const tbody = document.getElementById('mezhep-body');
-    
-    Object.keys(mezhepler).forEach(m => {
-        const row = `<tr>
-            <td class="${m.toLowerCase()}-bg"><strong>${m}</strong></td>
-            <td class="${m.toLowerCase()}-bg">${mezhepler[m]}</td>
-        </tr>`;
-        tbody.innerHTML += row;
-    });
+      <div class="hukum ${data.hukum}">
+        <h3>Hüküm: ${data.hukum}</h3>
+      </div>
+
+      ${data.ayet_metin ? `
+      <div class="quote">
+        ${data.ayet_metin}
+        <small>${data.ayet_referans}</small>
+      </div>` : ""}
+
+      ${data.hadis_metin ? `
+      <div class="quote">
+        ${data.hadis_metin}
+        <small>${data.hadis_bilgi}</small>
+      </div>` : ""}
+
+      <h3>Mezheplerin Görüşü</h3>
+      <div class="mezhepler">
+        <div class="m">Hanefi: ${mezhep.Hanefi}</div>
+        <div class="m">Şafii: ${mezhep.Şafii}</div>
+        <div class="m">Maliki: ${mezhep.Maliki}</div>
+        <div class="m">Hanbeli: ${mezhep.Hanbeli}</div>
+      </div>
+    </div>
+  `;
+}
+
+if (document.getElementById("recommended")) {
+  loadHome();
 }
