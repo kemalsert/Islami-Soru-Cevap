@@ -1,41 +1,21 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soru Detayı - Kütüphane</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fetva</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <main class="post-container">
-        <h1 id="soru-baslik"></h1>
-        
-        <div id="hukum-kart" class="hukum-box">
-            <span id="hukum-etiket"></span>
-        </div>
 
-        <div id="ayet-alan" class="quote-box">
-            <p id="ayet-metin"></p>
-            <small id="ayet-ref"></small>
-        </div>
+<div class="post-container" id="post">
 
-        <div id="hadis-alan" class="quote-box">
-            <p id="hadis-metin"></p>
-            <cite id="hadis-bilgi"></cite>
-        </div>
+</div>
 
-        <div id="mezhep-tablo-alan">
-            <h3>Mezhep Görüşleri</h3>
-            <table id="mezhep-tablo">
-                <thead>
-                    <tr>
-                        <th>Mezhep</th>
-                        <th>Görüş</th>
-                    </tr>
-                </thead>
-                <tbody id="mezhep-body"></tbody>
-            </table>
-        </div>
-    </main>
+<script src="script.js"></script>
+<script>
+  loadPost();
+</script>
+
 </body>
 </html>
