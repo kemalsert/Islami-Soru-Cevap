@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İslami Soru Cevap Arşivi</title>
+    <title>Kütüphane | İslami Soru Cevap</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>İslami Soru Cevap</h1>
-        <input type="text" id="search" placeholder="Soru ara...">
+        <h1>Kütüphane DB</h1>
+        <nav>
+            <input type="text" id="search" placeholder="Soru ara...">
+        </nav>
     </header>
-    
-    <main id="question-list">
-        </main>
+
+    <main>
+        <section id="oneri-section">
+            <h2>Önerilen Sorular</h2>
+            <div id="oneri-list" class="grid-container"></div>
+        </section>
+
+        <section id="tartismali-section">
+            <h2>Tartışmalı Konular (Mekruhlar)</h2>
+            <div id="mekruh-list" class="grid-container"></div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
