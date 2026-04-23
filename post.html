@@ -1,15 +1,34 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<title>Fetva</title>
-<link rel="stylesheet" href="/style.css">
-</head>
+<div class="card">
 
-<body>
+<div class="slider-wrap">
+  <div class="slider" id="mezhepSlider">
 
-<main id="post"></main>
+    <div class="slide hanefi">
+      <h4>Hanefi</h4>
+      <p>${m.Hanefi}</p>
+    </div>
 
-<script src="/script.js"></script>
-</body>
-</html>
+    <div class="slide safii">
+      <h4>Şafii</h4>
+      <p>${m["Şafii"]}</p>
+    </div>
+
+    <div class="slide maliki">
+      <h4>Maliki</h4>
+      <p>${m.Maliki}</p>
+    </div>
+
+    <div class="slide hanbeli">
+      <h4>Hanbeli</h4>
+      <p>${m.Hanbeli}</p>
+    </div>
+
+    <div class="slide sia">
+      <h4>Şia</h4>
+      <p>${m.Şia || "—"}</p>
+    </div>
+
+  </div>
+</div>
+
+</div>
