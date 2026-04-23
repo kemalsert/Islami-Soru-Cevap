@@ -1,65 +1,83 @@
-const API = "/api";
+const WORKER_URL = 'https://fetvaci.kullaniciadiniz.workers.dev';
 
-async function search() {
-  const q = document.getElementById("searchInput").value;
-  if (!q) return;
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('s');
 
-  window.location.href = `/post.html?slug=${encodeURIComponent(q)}`;
-}
+    if (slug) {
+        loadPost(slug);
+    } else if (document.getElementById('featuredGrid')) {
+        loadHome();
+    }
+});
 
 async function loadHome() {
-  const res1 = await fetch(API + "/recommended");
-  const rec = await res1.json();
+    const res = await fetch(`${WORKER_URL}/api/home`);
+    const data = await res.json();
 
-  const res2 = await fetch(API + "/controversial");
-  const con = await res2.json();
+    const featuredGrid = document.getElementById('featuredGrid');
+    const mekruhGrid = document.getElementById('mekruhGrid');
 
-  document.getElementById("recommended").innerHTML =
-    rec.map(i => `<a href="/post.html?slug=${i.slug}">📌 ${i.soru}</a>`).join("<br>");
+    data.featured.forEach(item => {
+        featuredGrid.innerHTML += createCard(item);
+    });
 
-  document.getElementById("controversial").innerHTML =
-    con.map(i => `<a href="/post.html?slug=${i.slug}">⚠ ${i.soru}</a>`).join("<br>");
+    data.mekruhlar.forEach(item => {
+        mekruhGrid.innerHTML += createCard(item);
+    });
 }
 
-async function loadPost() {
-  const slug = new URLSearchParams(location.search).get("slug");
-
-  const res = await fetch(API + "/post/" + slug);
-  const data = await res.json();
-
-  const mezhep = JSON.parse(data.mezhepler_json || "{}");
-
-  document.getElementById("post").innerHTML = `
-    <div class="card post">
-      <h1>${data.soru}</h1>
-
-      <div class="hukum ${data.hukum}">
-        <h3>Hüküm: ${data.hukum}</h3>
-      </div>
-
-      ${data.ayet_metin ? `
-      <div class="quote">
-        ${data.ayet_metin}
-        <small>${data.ayet_referans}</small>
-      </div>` : ""}
-
-      ${data.hadis_metin ? `
-      <div class="quote">
-        ${data.hadis_metin}
-        <small>${data.hadis_bilgi}</small>
-      </div>` : ""}
-
-      <h3>Mezheplerin Görüşü</h3>
-      <div class="mezhepler">
-        <div class="m">Hanefi: ${mezhep.Hanefi}</div>
-        <div class="m">Şafii: ${mezhep.Şafii}</div>
-        <div class="m">Maliki: ${mezhep.Maliki}</div>
-        <div class="m">Hanbeli: ${mezhep.Hanbeli}</div>
-      </div>
-    </div>
-  `;
+function createCard(item) {
+    return `
+        <div class="card" onclick="location.href='post.html?s=${item.slug}'">
+            <h3>${item.soru}</h3>
+            <p>${item.kategori}</p>
+        </div>
+    `;
 }
 
-if (document.getElementById("recommended")) {
-  loadHome();
+async function loadPost(slug) {
+    const res = await fetch(`${WORKER_URL}/api/post?slug=${slug}`);
+    const post = await res.json();
+
+    document.getElementById('postTitle').innerText = post.soru;
+    document.getElementById('hukumText').innerText = post.hukum;
+    
+    // Hüküm Rengi Belirleme
+    const card = document.getElementById('hukumCard');
+    const h = post.hukum.toLowerCase();
+    if(h.includes('mekruh')) card.classList.add('hukum-mekruh');
+    else if(h.includes('helal') || h.includes('caiz')) card.classList.add('hukum-helal');
+    else card.classList.add('hukum-haram');
+
+    if(post.ayet_metin) {
+        document.getElementById('ayetBox').classList.remove('hidden');
+        document.getElementById('ayetText').innerText = post.ayet_metin;
+        document.getElementById('ayetRef').innerText = post.ayet_referans;
+    }
+
+    if(post.hadis_metin) {
+        document.getElementById('hadisBox').classList.remove('hidden');
+        document.getElementById('hadisText').innerText = post.hadis_metin;
+        document.getElementById('hadisRef').innerText = post.hadis_bilgi;
+    }
+
+    document.getElementById('aciklama').innerText = post.aciklama;
+
+    // Mezhepler Tablosu
+    const mezhepler = JSON.parse(post.mezhep_json);
+    const mTable = document.getElementById('mezhepTable');
+    for (const [name, text] of Object.entries(mezhepler)) {
+        mTable.innerHTML += `
+            <div class="mezhep-item" style="background: #f9f9f9; border-top: 4px solid var(--primary)">
+                <strong>${name}</strong>
+                <p>${text}</p>
+            </div>
+        `;
+    }
+}
+
+function searchAction() {
+    const query = document.getElementById('searchInput').value;
+    alert('Arama özelliği aktif: ' + query); // Worker'da search endpoint'ine bağlanacak
 }
