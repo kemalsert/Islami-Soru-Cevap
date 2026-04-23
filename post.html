@@ -1,34 +1,136 @@
-<div class="card">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fetva</title>
 
-<div class="slider-wrap">
-  <div class="slider" id="mezhepSlider">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-    <div class="slide hanefi">
-      <h4>Hanefi</h4>
-      <p>${m.Hanefi}</p>
-    </div>
+body{
+  margin:0;
+  font-family:Inter;
+  background:#05070b;
+  color:#e6edf3;
+}
 
-    <div class="slide safii">
-      <h4>Şafii</h4>
-      <p>${m["Şafii"]}</p>
-    </div>
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:24px;
+}
 
-    <div class="slide maliki">
-      <h4>Maliki</h4>
-      <p>${m.Maliki}</p>
-    </div>
+/* ARTICLE STYLE */
+.article-title{
+  font-size:22px;
+  margin-bottom:10px;
+}
 
-    <div class="slide hanbeli">
-      <h4>Hanbeli</h4>
-      <p>${m.Hanbeli}</p>
-    </div>
+/* CARD */
+.card{
+  background:#0f1622;
+  border:1px solid rgba(255,255,255,0.06);
+  padding:16px;
+  border-radius:16px;
+  margin:12px 0;
+}
 
-    <div class="slide sia">
-      <h4>Şia</h4>
-      <p>${m.Şia || "—"}</p>
-    </div>
+/* QUOTES (CLEAR SEPARATION) */
+.quote-ayet{
+  border-left:3px solid #00c853;
+  padding-left:12px;
+  margin:10px 0;
+  color:#cbd5e1;
+}
 
-  </div>
+.quote-hadis{
+  border-left:3px solid #f5c542;
+  padding-left:12px;
+  margin:10px 0;
+  color:#cbd5e1;
+}
+
+/* HÜKÜM COLORS */
+.helal{background:#00c853;}
+.haram{background:#ff4d4d;}
+.mekruh{background:#f5c542;color:black;}
+.mubah{background:#8b8b8b;}
+
+/* MEZHEP CARDS */
+.mezhep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:10px;
+}
+
+.mezhep{
+  background:#121c2b;
+  border:1px solid rgba(255,255,255,0.06);
+  padding:12px;
+  border-radius:14px;
+}
+
+.mezhep h3{
+  margin:0 0 6px;
+  color:#f5c542;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="content"></div>
+
 </div>
 
+<script>
+async function load(){
+
+const slug = location.pathname.split("/post/")[1];
+
+const res = await fetch("/post/"+slug);
+const data = await res.json();
+
+const f = data.data;
+const m = JSON.parse(f.mezhepler_json);
+
+document.getElementById("content").innerHTML = `
+<div class="article-title">${f.soru}</div>
+
+<div class="card ${getClass(f.hukum)}">${f.hukum}</div>
+
+${f.ayet_metin ? `<div class="quote-ayet">📖 ${f.ayet_metin}<br>${f.ayet_referans}</div>` : ""}
+
+${f.hadis_metin ? `<div class="quote-hadis">☪️ ${f.hadis_metin}<br>${f.hadis_bilgi}</div>` : ""}
+
+<div class="card">${f.aciklama}</div>
+
+<div class="mezhep-grid">
+
+<div class="mezhep"><h3>Hanefi</h3><p>${m.Hanefi}</p></div>
+<div class="mezhep"><h3>Şafii</h3><p>${m["Şafii"]}</p></div>
+<div class="mezhep"><h3>Maliki</h3><p>${m.Maliki}</p></div>
+<div class="mezhep"><h3>Hanbeli</h3><p>${m.Hanbeli}</p></div>
+<div class="mezhep"><h3>Şia</h3><p>${m.Şia || "—"}</p></div>
+
 </div>
+`;
+
+}
+
+function getClass(h){
+h=h.toLowerCase();
+if(h.includes("helal")) return "helal";
+if(h.includes("haram")) return "haram";
+if(h.includes("mekruh")) return "mekruh";
+return "mubah";
+}
+
+load();
+</script>
+
+</body>
+</html>
