@@ -1,38 +1,27 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İslami Kütüphane | Soru & Cevap</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Fetva Kutuphane</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="hero">
-        <div class="container">
-            <h1>İslami Kütüphane</h1>
-            <p>Güvenilir kaynaklarla fıkhi bilgilere ulaşın.</p>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Merak ettiğiniz konuyu arayın...">
-                <button onclick="searchAction()">Ara</button>
-            </div>
-        </div>
-    </header>
 
-    <main class="container">
-        <section id="featured">
-            <h2 class="section-title">Önerilen Fetvalar</h2>
-            <div class="grid" id="featuredGrid">
-                </div>
-        </section>
+<header class="header">
+  <h1>İsfahan İlim Bahçesi</h1>
+  <input id="search" placeholder="Soru ara...">
+</header>
 
-        <section id="controversial">
-            <h2 class="section-title">Tartışmalı Konular (Mekruhlar)</h2>
-            <div class="grid" id="mekruhGrid">
-                </div>
-        </section>
-    </main>
+<section>
+  <h2>Önerilenler</h2>
+  <div id="recommended" class="grid"></div>
+</section>
 
-    <script src="script.js"></script>
+<section>
+  <h2>Tartışmalı Konular (Mekruh)</h2>
+  <div id="controversial" class="grid"></div>
+</section>
+
+<script src="script.html"></script>
 </body>
 </html>
