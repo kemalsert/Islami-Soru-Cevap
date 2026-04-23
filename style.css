@@ -1,108 +1,114 @@
+:root {
+    --primary: #1a4731; /* İslam yeşili tonu */
+    --accent: #c9a45c; /* Altın/Pirinç tonu */
+    --bg: #fdfcf8;
+    --text: #2c3e50;
+    --haram: #e74c3c;
+    --helal: #27ae60;
+    --mekruh: #f39c12;
+}
+
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f1a14;
-  color: #fff;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.6;
 }
 
-/* ISFAHAN CAMİ HAVA */
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+/* Hero & Search */
 .hero {
-  position: relative;
-  height: 280px;
-  background: url('https://images.unsplash.com/photo-1548013146-72479768bada') center/cover;
-  text-align: center;
-  padding-top: 60px;
+    background: linear-gradient(rgba(26,71,49,0.9), rgba(26,71,49,0.9)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-}
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
 
-.hero h1, .hero p, .search-box {
-  position: relative;
-  z-index: 2;
+.search-box {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .search-box input {
-  padding: 10px;
-  width: 200px;
+    width: 60%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
 }
 
 .search-box button {
-  padding: 10px;
-  background: gold;
-  border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    background: var(--accent);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 20px;
-}
+/* Grids */
+.section-title { border-bottom: 2px solid var(--accent); display: inline-block; margin: 40px 0 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 
 .card {
-  background: #15241d;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #2b4b3c;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--accent);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+
+/* Post Detail */
+.post-question { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; }
+
+.hukum-card {
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+    font-weight: 800;
 }
 
-.card a {
-  color: #9fe2b3;
-  text-decoration: none;
+/* Hüküm Renkleri */
+.hukum-mekruh { background-color: var(--mekruh); }
+.hukum-helal { background-color: var(--helal); }
+.hukum-haram { background-color: var(--haram); }
+
+.clean-quote {
+    padding: 20px 40px;
+    margin: 20px 0;
+    font-style: italic;
+    font-size: 1.2rem;
+    border-left: none;
+    position: relative;
+    background: #f1f1f1;
 }
 
-.danger {
-  border-color: #a33;
+cite { display: block; margin-top: 10px; font-weight: bold; font-style: normal; color: var(--accent); }
+
+.mezhep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
 }
 
-/* POST */
-.post-container {
-  padding: 20px;
+.mezhep-item {
+    padding: 20px;
+    border-radius: 8px;
+    background: #eee;
+    border: 1px solid #ddd;
 }
 
-.post h1 {
-  color: gold;
-}
-
-.hukum {
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-}
-
-.hukum.mekruh {
-  background: #7a5a00;
-}
-
-.hukum.haramm {
-  background: #7a0000;
-}
-
-.hukum.mubah {
-  background: #1f5a3a;
-}
-
-/* QUOTE */
-.quote {
-  background: #1c2f25;
-  padding: 10px;
-  border-left: 3px solid gold;
-  margin: 10px 0;
-}
-
-/* MEZHEP */
-.mezhepler {
-  display: grid;
-  gap: 10px;
-}
-
-.m {
-  padding: 10px;
-  background: #122019;
-  border-radius: 6px;
-}
+.hidden { display: none; }
