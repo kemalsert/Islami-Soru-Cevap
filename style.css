@@ -1,61 +1,101 @@
-body {
-  margin:0;
-  font-family: Arial;
-  background:#0f172a;
-  color:white;
+body{
+margin:0;
+font-family: "Georgia", serif;
+background: radial-gradient(circle at top, #0f172a, #050814);
+color:#e5e7eb;
+line-height:1.6;
 }
 
-header {
-  padding:20px;
-  text-align:center;
-  background:#111827;
+/* HEADER */
+header{
+padding:40px 20px;
+text-align:center;
+background: linear-gradient(90deg,#0b1220,#111827,#0b1220);
+border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-input {
-  padding:10px;
-  width:60%;
+h1{
+font-size:36px;
+letter-spacing:2px;
+color:#f8fafc;
 }
 
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:10px;
-  padding:20px;
+/* SEARCH */
+input{
+width:60%;
+padding:14px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+background:#0b1220;
+color:white;
+outline:none;
 }
 
-.card {
-  background:#1e293b;
-  padding:15px;
-  border-radius:10px;
-  text-decoration:none;
-  color:white;
+/* SECTION TITLE */
+h2{
+padding:20px;
+font-weight:500;
+color:#93c5fd;
 }
 
-.card:hover {
-  background:#334155;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+padding:20px;
 }
 
-.mekruh {
-  border:2px solid orange;
+/* CARD */
+.card{
+background: linear-gradient(145deg,#0b1220,#111827);
+padding:18px;
+border-radius:16px;
+text-decoration:none;
+color:#e5e7eb;
+border:1px solid rgba(255,255,255,0.06);
+transition:0.3s;
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.post {
-  padding:20px;
+.card:hover{
+transform:translateY(-6px);
+border-color:#3b82f6;
 }
 
-.block {
-  background:#111827;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
+/* MEKRUH */
+.mekruh{
+border-left:4px solid #f59e0b;
 }
 
-.hanefi { background:#1d4ed8; padding:5px; }
-.safi { background:#047857; padding:5px; }
-.maliki { background:#b45309; padding:5px; }
-.hanbeli { background:#7c2d12; padding:5px; }
-
-blockquote {
-  border-left:3px solid #38bdf8;
-  padding-left:10px;
+/* POST */
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
 }
+
+.block{
+background: linear-gradient(145deg,#0b1220,#0f172a);
+padding:18px;
+margin:16px 0;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+h1{
+font-size:30px;
+margin-bottom:20px;
+}
+
+blockquote{
+border-left:3px solid #38bdf8;
+padding-left:14px;
+opacity:0.9;
+}
+
+/* MEZHEP BOX */
+.hanefi{background:#1d4ed8;padding:8px;border-radius:8px;margin:5px 0}
+.safi{background:#047857;padding:8px;border-radius:8px;margin:5px 0}
+.maliki{background:#b45309;padding:8px;border-radius:8px;margin:5px 0}
+.hanbeli{background:#7c2d12;padding:8px;border-radius:8px;margin:5px 0}
