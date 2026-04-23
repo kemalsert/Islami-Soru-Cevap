@@ -1,25 +1,24 @@
 body {
   margin:0;
   font-family: Arial;
-  background: linear-gradient(120deg,#0f172a,#1e293b);
-  color:#fff;
+  background:#0f172a;
+  color:white;
 }
 
-.header {
+header {
   padding:20px;
   text-align:center;
-  background: rgba(0,0,0,0.3);
+  background:#111827;
 }
 
 input {
   padding:10px;
   width:60%;
-  border-radius:10px;
 }
 
 .grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:10px;
   padding:20px;
 }
@@ -27,14 +26,12 @@ input {
 .card {
   background:#1e293b;
   padding:15px;
-  border-radius:12px;
+  border-radius:10px;
   text-decoration:none;
   color:white;
-  transition:0.3s;
 }
 
 .card:hover {
-  transform:scale(1.05);
   background:#334155;
 }
 
@@ -53,27 +50,12 @@ input {
   border-radius:10px;
 }
 
-.hukum.mekruh { border-left:5px solid orange; }
-.hukum.farz { border-left:5px solid green; }
-.hukum.haram { border-left:5px solid red; }
+.hanefi { background:#1d4ed8; padding:5px; }
+.safi { background:#047857; padding:5px; }
+.maliki { background:#b45309; padding:5px; }
+.hanbeli { background:#7c2d12; padding:5px; }
 
 blockquote {
-  background:#0b1220;
-  padding:10px;
-  border-left:4px solid #38bdf8;
+  border-left:3px solid #38bdf8;
+  padding-left:10px;
 }
-
-.mezhepler {
-  display:grid;
-  gap:5px;
-}
-
-.mezhep {
-  padding:8px;
-  border-radius:8px;
-}
-
-.hanefi { background:#1d4ed8; }
-.safi { background:#047857; }
-.maliki { background:#b45309; }
-.hanbeli { background:#7c2d12; }
