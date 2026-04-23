@@ -1,40 +1,108 @@
-:root {
-    --bg: #f4f1ea;
-    --text: #2c3e50;
-    --haram: #e74c3c;
-    --helal: #27ae60;
-    --mekruh: #f39c12;
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f1a14;
+  color: #fff;
 }
 
-body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-
-.quote-box {
-    margin: 20px 0;
-    padding: 15px 30px;
-    border-left: 4px solid #d4af37;
-    background: rgba(212, 175, 55, 0.05);
+/* ISFAHAN CAMİ HAVA */
+.hero {
+  position: relative;
+  height: 280px;
+  background: url('https://images.unsplash.com/photo-1548013146-72479768bada') center/cover;
+  text-align: center;
+  padding-top: 60px;
 }
 
-.hukum-box {
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
 }
 
-/* Hüküm Renkleri */
-.bg-helal { background-color: var(--helal); color: white; }
-.bg-haram { background-color: var(--haram); color: white; }
-.bg-mekruh { background-color: var(--mekruh); color: white; }
+.hero h1, .hero p, .search-box {
+  position: relative;
+  z-index: 2;
+}
 
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-th, td { padding: 15px; border: 1px solid #ddd; text-align: left; }
+.search-box input {
+  padding: 10px;
+  width: 200px;
+}
 
-/* Mezhep Arkaplanları */
-.hanefi-bg { background-color: #ecf0f1; }
-.safii-bg { background-color: #dfe6e9; }
-.maliki-bg { background-color: #f7f1e3; }
-.hanbeli-bg { background-color: #f1f2f6; }
+.search-box button {
+  padding: 10px;
+  background: gold;
+  border: none;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #15241d;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #2b4b3c;
+}
+
+.card a {
+  color: #9fe2b3;
+  text-decoration: none;
+}
+
+.danger {
+  border-color: #a33;
+}
+
+/* POST */
+.post-container {
+  padding: 20px;
+}
+
+.post h1 {
+  color: gold;
+}
+
+.hukum {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.hukum.mekruh {
+  background: #7a5a00;
+}
+
+.hukum.haramm {
+  background: #7a0000;
+}
+
+.hukum.mubah {
+  background: #1f5a3a;
+}
+
+/* QUOTE */
+.quote {
+  background: #1c2f25;
+  padding: 10px;
+  border-left: 3px solid gold;
+  margin: 10px 0;
+}
+
+/* MEZHEP */
+.mezhepler {
+  display: grid;
+  gap: 10px;
+}
+
+.m {
+  padding: 10px;
+  background: #122019;
+  border-radius: 6px;
+}
